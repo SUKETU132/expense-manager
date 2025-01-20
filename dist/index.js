@@ -22,7 +22,7 @@ const PORT = 3000;
     console.log("MONGO db connection failed !!! ", err);
 });
 app.use((0, cors_1.default)({
-    origin: '*',
+    origin: 'https://expense-nine-kappa.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
