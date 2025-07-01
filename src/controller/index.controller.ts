@@ -5,7 +5,7 @@ import { User, IExpenseTodo, IUser } from '../model/user.model';
 import { AppError, asyncHandler } from '../utils/error';
 
 const signToken = (id: string) => {
-    return jwt.sign({ id }, "This is the key", { expiresIn: '1h' });
+    return jwt.sign({ id }, "This is the key", { expiresIn: '60d' });
 };
 
 export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -46,11 +46,11 @@ export const login = asyncHandler(async (req: Request, res: Response, next: Next
     }
 
     const token = signToken(user._id.toString());
-    const oneDay = 1000 * 60 * 60 * 24;
+    const twoMonths = 1000 * 60 * 60 * 24 * 60; // 60 days
     return res.status(200).cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        expires: new Date(Date.now() + oneDay),
+        expires: new Date(Date.now() + twoMonths),
         sameSite: 'lax',
     }).json({
         status: 'success',
@@ -59,6 +59,7 @@ export const login = asyncHandler(async (req: Request, res: Response, next: Next
         message: 'Login successful.',
     });
 });
+
 
 export const addExpense = asyncHandler(async (req: any, res: Response, next: NextFunction) => {
     const { name, amount, paymentStatus } = req.body;
