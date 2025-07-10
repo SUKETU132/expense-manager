@@ -48,7 +48,7 @@ exports.login = (0, error_1.asyncHandler)((req, res, next) => __awaiter(void 0, 
         throw new error_1.AppError('Invalid username or password', 401);
     }
     const token = signToken(user._id.toString());
-    const oneDay = 1000 * 60 * 60 * 24;
+    const oneDay = 1000 * 60 * 60 * 24 * 60;
     return res.status(200).cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
