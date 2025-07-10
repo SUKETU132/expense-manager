@@ -17,7 +17,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_model_1 = require("../model/user.model");
 const error_1 = require("../utils/error");
 const signToken = (id) => {
-    return jsonwebtoken_1.default.sign({ id }, "This is the key", { expiresIn: '1h' });
+    return jsonwebtoken_1.default.sign({ id }, "This is the key", { expiresIn: '60d' });
 };
 exports.register = (0, error_1.asyncHandler)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, userName, password, confirmPassword } = req.body;
